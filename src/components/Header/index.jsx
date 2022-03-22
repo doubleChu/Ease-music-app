@@ -1,7 +1,13 @@
-import * as React from 'react'
+import * as React from "react";
 
 export default function Header() {
   return (
-    <div>index</div>
-  )
+    <div>
+      <ul>
+        <li>发现音乐</li>
+        <li>我的音乐</li>
+        <li>我的朋友</li>
+      </ul>
+    </div>
+  );
 }
