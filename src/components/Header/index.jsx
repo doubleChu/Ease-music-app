@@ -1,13 +1,18 @@
 import * as React from "react";
+import { LinkWrapper } from "./style";
+import { useRoutes} from "react-router-dom";
+import { router } from "../../router";
 
 export default function Header() {
+  const element = useRoutes(router);
   return (
     <div>
       <ul>
-        <li>发现音乐</li>
-        <li>我的音乐</li>
-        <li>我的朋友</li>
+        <LinkWrapper to="/find">发现音乐</LinkWrapper>
+        <LinkWrapper to="/mine">我的音乐</LinkWrapper>
+        <LinkWrapper to="/friends">我的朋友</LinkWrapper>
       </ul>
+      {element}
     </div>
   );
 }

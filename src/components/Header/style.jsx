@@ -1,8 +1,8 @@
-import styledComponents from "styled-components";
+import styled from "styled-components";
+import { Link } from "react-router-dom";
 
-export const LiWrapper = styledComponents.li`
-li {
-    display: inline;                
-    }  
-`
-        
+export const LinkWrapper = styled(Link)`
+    display: inline;
+    padding: 5px;
+    font-size: 20px;
+`;
