@@ -1,11 +1,4 @@
 import styled from "styled-components"
-import { Link } from "react-router-dom"
-
-export const LinkWrapper = styled(Link)`
-  display: inline;
-  padding: 5px;
-  font-size: 20px;
-`
 
 export const HeaderWrapper = styled.div`
   width: 100%;
@@ -41,6 +34,7 @@ export const HeaderLeft = styled.div`
       height: 70px;
       text-align: center;
       line-height: 70px;
+      color: #ccc;
       &:hover {
         text-decoration: none;
         background-color: #000;
@@ -53,7 +47,7 @@ export const HeaderLeft = styled.div`
           content: "";
           width: 28px;
           height: 19px;
-          background-image: url(import("../assets/img/sprite_01.png"));
+          background-image: url(${require('../../assets/imgs/sprite_01.png')});
           background-position: -192px 0;
           top: 20px;
           right: -20px;
@@ -72,7 +66,7 @@ export const HeaderLeft = styled.div`
         bottom: -1px;
         left: 50%;
         transform: translate(-50%, 0);
-        background-image: url(import("../assets/img/sprite_01.png"));
+        background-image: url(${require('../../assets/imgs/sprite_01.png')});
         background-position: 254px 0;
       }
     }

@@ -1,20 +1,22 @@
 import * as React from "react"
 import { HeaderLeft, HeaderRight, HeaderWrapper } from "./style"
-import { useRoutes, Link, NavLink } from "react-router-dom"
-import { router } from "../../router"
+import { Link, NavLink } from "react-router-dom"
 
 export default function Header() {
-  const showIconLink = (item, index) => {
+
+  const CustomNavLink = ({ children, to, ...props }) => {
     return (
-      <NavLink
-        key = {item.path} to = {item.path}
-        className="header-item" activeClassName="link-active">
-        {/* <em>{item.title}</em> */}
-        <i className="icon"></i>
-      </NavLink>
-    )
+        <NavLink
+          key={children}
+          to={to}
+          {...props}
+          className={({ isActive }) => "header-item" + (isActive ? " link-active" : "")}
+        >
+          {children}
+          <i className="icon"></i>
+        </NavLink>
+    );
   }
-  const element = useRoutes(router)
   return (
     // <div>
     //   <ul>
@@ -31,7 +33,28 @@ export default function Header() {
             网易云音乐
           </Link>
           <div className="header-group">
-            {router.map((item, index) => {return showIconLink(item,index);})}
+          <CustomNavLink to='/'>
+            发现音乐
+          </CustomNavLink> 
+          <CustomNavLink to='my'>
+            我的音乐
+          </CustomNavLink>
+          <CustomNavLink to='friend'>
+            关注
+          </CustomNavLink>
+          <a href="https://music.163.com/store/product" target="_blank" rel="noreferrer"
+          className="header-item" key="商城">
+            商城
+          </a>
+          <a href="https://music.163.com/nmusician/web/index#/" target="_blank" rel="noreferrer"
+          className="header-item" key="音乐人">
+            音乐人
+          </a>
+          <a href="https://music.163.com/#/download" target="_blank" rel="noreferrer"
+          className="header-item" key="下载客户端">
+            下载客户端
+          </a>
+          <i className="icon"></i>
           </div>
         </HeaderLeft>
         <HeaderRight></HeaderRight>
