@@ -7,11 +7,11 @@ export const router = [
         element: <></>
     },
     {
-        path: "/find",
+        path: "discover",
         element: <FindMusic />,
     },
     {
-        path: "/mine",
+        path: "mine",
         element: <MyMusic />,
     },
     {
