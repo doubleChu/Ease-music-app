@@ -75,16 +75,16 @@ export const HeaderLeft = styled.div`
 export const HeaderRight = styled.div`
   display: flex;
   align-items: center;
-  color: #ccc;
+  color: #000;
   font-size: 12px;
   .search-wrapper {
     position: relative;
     /* 搜索框 */
     .search {
-      width: 221px;
+      width: 158px;
       height: 32px;
       border-radius: 16px;
-
+      background-color: #fff;
       input {
         font-size: 14px;
         font-family: "微软雅黑";
@@ -93,38 +93,7 @@ export const HeaderRight = styled.div`
         }
       }
     }
-    /* icons */
-    .icons-wrapper {
-      display: flex;
-      .ctrl-wrapper {
-        background: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
-        border-radius: 3px;
-        box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff,
-          0 1px 2px 1px rgba(30, 35, 90, 0.4);
-        color: rgb(150 159 175);
-        display: flex;
-        align-items: center;
-        height: 20px;
-        justify-content: center;
-        margin-right: 0.5em;
-        padding-bottom: 2px;
-        width: 25px;
-      }
-      .k-wrapper {
-        background: linear-gradient(-225deg, #d5dbe4, #f8f8f8);
-        border-radius: 3px;
-        box-shadow: inset 0 -2px 0 0 #cdcde6, inset 0 0 1px 1px #fff,
-          0 1px 2px 1px rgba(30, 35, 90, 0.4);
-        color: #969faf;
-        display: flex;
-        align-items: center;
-        height: 20px;
-        justify-content: center;
-        margin-right: 0.6em;
-        padding-bottom: 2px;
-        width: 25px;
-      }
-    }
+    
     /* 下拉框 */
     .down-slider {
       position: absolute;
@@ -194,23 +163,39 @@ export const HeaderRight = styled.div`
     }
   }
   .center {
-    width: 75px;
+    width: 90px;
+    text-decoration: none;
     height: 32px;
-    line-height: 32px;
-    text-align: center;
-    border: 1px solid #666;
-    border-radius: 16px;
-    margin: 0 13px;
-    background-color: transparent;
+    margin: 0 12px;
+    box-sizing: border-box;
+    padding-left: 16px;
+    border: 1px solid #4F4F4F;
+    background-position: 0 -140px;
+    line-height: 33px;
+    color: #ccc;
+    border-radius: 20px;
+
     &:hover {
       cursor: pointer;
       border-color: #fff;
       color: #fff;
     }
   }
+  .login {
+    height: 45px;
+    margin: 19px 0 0 20px;
+    padding: 0 22px 0 0;
+    background-position: right -47px;
+    background-image: none;
+    .link{
+      display: block;
+      width: 28px;
+      margin-top: 7px;
+      color: #787878;
+    }
+  }
   .login:hover {
     cursor: pointer;
-    text-decoration: underline;
   }
   .profile-img {
     width: 35px;

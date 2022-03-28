@@ -1,9 +1,13 @@
 import * as React from "react"
+import { useState } from "react";
 import { HeaderLeft, HeaderRight, HeaderWrapper } from "./style"
 import { Link, NavLink } from "react-router-dom"
+import { Input , InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Header() {
-
+  const [isRedirect, setRedirect] = useState(false);
+  
   const CustomNavLink = ({ children, to, ...props }) => {
     return (
         <NavLink
@@ -57,7 +61,26 @@ export default function Header() {
           <i className="icon"></i>
           </div>
         </HeaderLeft>
-        <HeaderRight></HeaderRight>
+        <HeaderRight>
+          <div className="search-wrapper">
+            <Input
+            className="search" // TODO: add events
+            disableUnderline={true}
+            placeholder="音乐/视频/电台/用户"
+            startAdornment={<InputAdornment position="start"><SearchIcon style={{marginLeft: "5px"}} fontSize="small"/></InputAdornment>}
+
+            />
+            {/* <div
+              className="down-slider"
+              style={{ display: 'block' }} // TODO: add focus state
+            ></div> */}
+
+          </div>
+          <a className="center" href="https://music.163.com/#/login?targetUrl=%2Fcreatorcenter" target="_blank" rel="noreferrer">创作者中心</a>
+          <div className="login">
+            <a href="#" className="link">登录</a>
+          </div>
+        </HeaderRight>
       </div>
       <div className="red-line"></div>
     </HeaderWrapper>
