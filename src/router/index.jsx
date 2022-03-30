@@ -1,6 +1,7 @@
-import FindMusic from "../pages/FindMusic";
+import DiscoverMusic from "../pages/DiscoverMusic";
 import MyFriends from "../pages/MyFriends";
 import MyMusic from "../pages/MyMusic";
+
 export const router = [
     {
         path: "/",
@@ -8,14 +9,36 @@ export const router = [
     },
     {
         path: "discover",
-        element: <FindMusic />,
+        element: <DiscoverMusic />,
+        children: [
+            {
+                path: "toplist",
+                element : <div />,
+            },
+            {
+                path: "playlist",
+                element: <div />,
+            },
+            {
+                path: "djradio",
+                element: <div />,
+            },
+            {
+                path: "artist",
+                element: <div />,
+            },
+            {
+                path: "album",
+                element: <div />,
+            },
+        ]
     },
     {
-        path: "mine",
+        path: "my",
         element: <MyMusic />,
     },
     {
-        path: "friends",
+        path: "friend",
         element: <MyFriends />,
     },
 ];
