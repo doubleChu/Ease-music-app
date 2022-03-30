@@ -37,7 +37,7 @@ export default function Header() {
             网易云音乐
           </Link>
           <div className="header-group">
-          <CustomNavLink to='/'>
+          <CustomNavLink to='discover'>
             发现音乐
           </CustomNavLink> 
           <CustomNavLink to='my'>

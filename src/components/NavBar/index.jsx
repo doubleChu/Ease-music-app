@@ -5,7 +5,7 @@ import { NavLink } from 'react-router-dom'
 const discoverMenu = [
   {
     title: '推荐',
-    link: '/',
+    link: 'recommend',
   },
   {
     title: '排行榜',
