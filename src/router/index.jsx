@@ -2,6 +2,7 @@ import { Navigate, useRoutes } from "react-router-dom";
 import DiscoverMusic from "../pages/DiscoverMusic";
 import MyFriends from "../pages/MyFriends";
 import MyMusic from "../pages/MyMusic";
+import Recommend from "../pages/DiscoverMusic/childrenPages/recommend";
 
 export default function RouElement () {
     return(
@@ -24,7 +25,7 @@ const router = [
             },
             {
                 path: "recommend",
-                element : <div>000</div>,
+                element : <Recommend/>,
             },
             {
                 path: "toplist",
