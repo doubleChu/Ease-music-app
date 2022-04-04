@@ -78,7 +78,7 @@ export default function Header() {
           </div>
           <a className="center" href="https://music.163.com/#/login?targetUrl=%2Fcreatorcenter" target="_blank" rel="noreferrer">创作者中心</a>
           <div className="login">
-            <a href="#" className="link">登录</a>
+            <a href="/#" className="link">登录</a>
           </div>
         </HeaderRight>
       </div>

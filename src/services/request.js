@@ -16,7 +16,7 @@ instance.interceptors.request.use(
   (error) => Promise.reject(error)
 );
 
-instance.interceptors.request.use(
+instance.interceptors.response.use(
   (response) => {
     nprogress.done();
     return response.data;
