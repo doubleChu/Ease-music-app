@@ -3,7 +3,7 @@ import { combineReducers } from "redux";
 import recommendReducer from '../pages/DiscoverMusic/childrenPages/recommend/store'
 
 const reducer = combineReducers({
-    recommend: recommendReducer,
+    recommendReducer: recommendReducer,
 })
 
 export default reducer

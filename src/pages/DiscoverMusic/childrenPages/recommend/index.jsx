@@ -6,8 +6,8 @@ import Banners from "./childrenCompo/Banners";
 export default function Recommend() {
   return (
     <Fragment>
+      <Banners/>
       <Content className="w980">
-        <Banners/>
         {/* 主体推荐页左侧 */}
         <RecommendLeft>
         </RecommendLeft>

@@ -1,12 +1,13 @@
 import * as React from "react"
 import { shallowEqual, useSelector} from "react-redux"
-import { useState, useEffect, useRef, useCallback } from "react"
+import { useState, useEffect, useRef} from "react"
 import { useRecommendAction } from "../../store/actionCreator"
-import { Carousel } from "antd"
+import Carousel from "react-alice-carousel"
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from "./style"
+import 'react-alice-carousel/lib/alice-carousel.css';
 
 export default function Banners() {
-  const [activeIndex, setActiveIndex] = useState(-1)
+  const [activeIndex, setActiveIndex] = useState(0)
   const { topBanners } = useSelector(
     (state) => ({ topBanners: state.recommendReducer.topBanners }),
     shallowEqual
@@ -20,9 +21,13 @@ export default function Banners() {
     recommendAction()
   }, [recommendAction])
 
-  const bannerChange = useCallback((from, to) => {
-    setActiveIndex(to)
-  }, [])
+  const bannerChange = () => {
+    if (activeIndex < topBanners.length - 1){
+      setActiveIndex(activeIndex + 1)
+    }
+    else
+    setActiveIndex(0)
+  }
   // redux-thunk写法
   // useEffect(() => {
   //   // 在组件渲染之后发送网络请求
@@ -39,28 +44,29 @@ export default function Banners() {
       <div className="banner w980">
         <BannerLeft>
           <Carousel
-            effect="fade"
-            autoplay={true}
             ref={bannerRef}
-            beforeChange={bannerChange}>
-            {topBanners && topBanners.map(item => {
-              return (
-                <div key={item.imageUrl}>
-                  <img src={item.imageUrl} alt={item.typeTitle} />
-                </div>
-              )
-            })}
+            autoPlay={true}
+            infinite={true}
+            autoPlayInterval={3000}
+            animationType="fadeout"
+            onSlideChange={bannerChange}
+            items={topBanners &&
+              topBanners.map((item) => {
+                return (
+                    <img src={item.imageUrl} alt={item.typeTitle} />
+                )
+              })}>
           </Carousel>
         </BannerLeft>
         <BannerRight />
         <BannerControl>
           <button
             className="btn"
-            onClick={() => bannerRef.current.prev()}
+            onClick={() => bannerRef.current.slidePrev()}
           ></button>
           <button
             className="btn"
-            onClick={() => bannerRef.current.next()}
+            onClick={() => bannerRef.current.slideNext()}
           ></button>
         </BannerControl>
       </div>

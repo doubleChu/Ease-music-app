@@ -2,8 +2,8 @@ import * as React from "react"
 import { useState } from "react";
 import { HeaderLeft, HeaderRight, HeaderWrapper } from "./style"
 import { Link, NavLink } from "react-router-dom"
-import { Input } from 'antd';
-import SearchOutlined from '@ant-design/icons/SearchOutlined';
+import { Input , InputAdornment } from '@mui/material';
+import SearchIcon from '@mui/icons-material/Search';
 
 export default function Header() {
   const [isRedirect, setRedirect] = useState(false);
@@ -67,7 +67,7 @@ export default function Header() {
             className="search" // TODO: add events
             disableUnderline={true}
             placeholder="音乐/视频/电台/用户"
-            prefix={<SearchOutlined />}
+            startAdornment={<InputAdornment position="start"><SearchIcon style={{marginLeft: "5px"}} fontSize="small"/></InputAdornment>}
 
             />
             {/* <div
