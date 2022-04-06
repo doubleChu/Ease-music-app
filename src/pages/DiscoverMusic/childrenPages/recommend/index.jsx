@@ -3,6 +3,7 @@ import { Fragment } from "react";
 import {Content, RecommendLeft, RecommendRight} from './style'
 import Banners from "./childrenCompo/Banners";
 import PopularRecommend from "./childrenCompo/PopularRecom";
+import NewestAlbum from "./childrenCompo/NewestAlbum";
 
 export default function Recommend() {
   return (
@@ -12,6 +13,7 @@ export default function Recommend() {
         {/* 主体推荐页左侧 */}
         <RecommendLeft>
           <PopularRecommend/>
+          <NewestAlbum/>
         </RecommendLeft>
         {/* 主体推荐页右侧 */}
         <RecommendRight>

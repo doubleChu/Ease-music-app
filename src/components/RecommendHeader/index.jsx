@@ -1,20 +1,23 @@
-import * as React from 'react'
-import { RcmHeaderLeft, RcmHeaderRight, RcmHeaderWrapper } from './style'
+import * as React from "react"
+import { RcmHeaderLeft, RcmHeaderRight, RcmHeaderWrapper } from "./style"
 
-export default function RecommendHeader (props) {
+export default function RecommendHeader(props) {
   const { title, keywords } = props
+  let headerHref = ""
+  if (title === "热门推荐") headerHref = "/discover/playlist/"
+  else if (title === "新碟上架") headerHref = "/discover/album/"
+  else if (title === "新碟上架") headerHref = "/discover/toplist"
   return (
     <RcmHeaderWrapper>
       <RcmHeaderLeft>
         <h2 className="popular-title">
-          <a href="/discover/playlist/">
-            {title}
-          </a>
+          <a href={headerHref}>{title}</a>
         </h2>
         <ul className="keywords">
-          {keywords.map(item => {
+          {keywords.map((item) => {
             return (
               <li className="item" key={item}>
+                {/* 热门推荐分类href：*/}
                 <a href={"/discover/playlist/?cat=" + item}>{item}</a>
                 <span className="line">|</span>
               </li>
@@ -23,11 +26,9 @@ export default function RecommendHeader (props) {
         </ul>
       </RcmHeaderLeft>
       <RcmHeaderRight>
-        <a href='/discover/playlist/'>更多</a>
-        <i className="icon"/>
+        <a href={headerHref}>更多</a>
+        <i className="icon" />
       </RcmHeaderRight>
     </RcmHeaderWrapper>
   )
 }
-
-

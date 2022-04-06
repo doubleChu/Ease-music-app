@@ -17,7 +17,7 @@ export default function PopularRecommend() {
 
   const popularRecommendAction = usePopularRecommendAction()
   useEffect(() => {
-    popularRecommendAction()
+    popularRecommendAction(8)
   }, [popularRecommendAction])
 
   return (

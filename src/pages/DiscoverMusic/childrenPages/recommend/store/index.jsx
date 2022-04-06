@@ -1,6 +1,7 @@
 const initState = {
     topBanners:[],
     popularRecommend: [],
+    newestAlbum: [],
 }
 
 export default function reducer (state = initState, action){
@@ -13,6 +14,9 @@ export default function reducer (state = initState, action){
         case "CHANGE_POPULAR_RECOMMEND":
             newState.popularRecommend = action.popularRecommend
             return newState
+        case "CHANGE_NEWEST_ALBUM":
+            newState.newestAlbum = action.newestAlbum
+            return newState   
         default:
             return state
     }
