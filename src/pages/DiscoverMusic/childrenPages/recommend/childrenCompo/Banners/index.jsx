@@ -1,7 +1,7 @@
 import * as React from "react"
 import { shallowEqual, useSelector} from "react-redux"
 import { useState, useEffect, useRef, useCallback } from "react"
-import { useRecommendAction } from "../../store/actionCreator"
+import { useBannersAction } from "../../store/actionCreator"
 import { Carousel } from "antd"
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from "./style"
 
@@ -12,13 +12,13 @@ export default function Banners() {
     shallowEqual
   )
 
-  const recommendAction = useRecommendAction()
+  const bannerAction = useBannersAction()
 
   const bannerRef = useRef()
   const bgRef = useRef()
   useEffect(() => {
-    recommendAction()
-  }, [recommendAction])
+    bannerAction()
+  }, [bannerAction])
 
   const bannerChange = useCallback((from, to) => {
     setActiveIndex(to)
