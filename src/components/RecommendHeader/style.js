@@ -5,19 +5,16 @@ export const RcmHeaderWrapper = styled.div`
   justify-content: space-between;
   height: 33px;
   padding: 0 10px 0 0;
-  padding-left: ${props => props.showIcon?'34px':'2px'};
+  padding-left: 34px;
   border-bottom: 2px solid #c10d0c;
-  background: ${props => {
-    const url = 'url('+require('../../assets/img/sprite_02.png')+') no-repeat center'
-    return props.showIcon?  url: ''
-  } };
+  background: url(${require('../../assets/imgs/sprite_02.png')}) no-repeat center;
   background-position: -225px -156px;
   line-height: 33px;
 `
 
 export const RcmHeaderLeft = styled.div`
   display: flex;
-  .hot-title {
+  .popular-title {
     display: flex;
     margin-bottom: 5px;
     a {
@@ -48,7 +45,7 @@ export const RcmHeaderRight = styled.div`
     height: 12px;
     margin-left: 4px;
     vertical-align: middle;
-    background: transparent url('${require('../../assets/img/sprite_02.png')}') no-repeat center;
+    background: transparent url(${require('../../assets/imgs/sprite_02.png')}) no-repeat center;
     background-position: 0 -240px;
   }
 `

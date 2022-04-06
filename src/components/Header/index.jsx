@@ -65,7 +65,6 @@ export default function Header() {
           <div className="search-wrapper">
             <Input
             className="search" // TODO: add events
-            disableUnderline={true}
             placeholder="音乐/视频/电台/用户"
             prefix={<SearchOutlined />}
 

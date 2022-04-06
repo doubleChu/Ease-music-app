@@ -12,8 +12,6 @@ export default function SongCover(props) {
   const playCount = (info && info.playCount) || (songList && songList.playCount) 
   // name
   const name = (info && info.name) || (songList && songList.name) 
-  // nickname
-  const nickname = (info && info.copywriter) || (songList && songList.creator.nickname) 
   // id
   const songInfoId = (info && info.id) || (songList && songList.id)
   
@@ -24,17 +22,15 @@ export default function SongCover(props) {
         <div className="cover-mask sprite_cover">
           <div className="bottom-bar sprite_cover">
             <span>
-              <i className="sprite_icon erji"></i>
+              <i className="sprite_icon earphone"></i>
               {setCountFormat(playCount)}
             </span>
             <i className="sprite_icon play"></i>
           </div>
         </div>
       </div>
-      <div className="cover-title text-nowrap">by-{name}</div>
-      <div className="cover-source text-nowrap">
-        by {(info && info.copywriter) || nickname}
-      </div>
+      {/* ?text-nowrap */}
+      <div className="cover-title">{name}</div>
     </SongCoverWrapper>
   )
 }

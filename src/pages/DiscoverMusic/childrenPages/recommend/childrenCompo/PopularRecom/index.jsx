@@ -1,33 +1,33 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import { shallowEqual, useSelector } from 'react-redux'
-import { HotRecommendWrapper } from './style'
-import ThemeHeaderRmc from '../../../../../../components/RecommendHeader'
+import { PopularRecommendWrapper } from './style'
+import RecommendHeader from '../../../../../../components/RecommendHeader'
 import { usePopularRecommendAction } from '../../store/actionCreator'
-import SongCover from 'components/song-cover'
+import SongCover from '../../../../../../components/SongCover'
 
-export default function HotRecommend() {
+export default function PopularRecommend() {
   // state
 
   // redux
-  const { hotRecommends } = useSelector(
+  const { popularRecommend } = useSelector(
     (state) => ({ popularRecommend: state.recommendReducer.popularRecommend }),
     shallowEqual
   )
 
-  const popularRecommend = usePopularRecommendAction()
+  const popularRecommendAction = usePopularRecommendAction()
   useEffect(() => {
-    popularRecommend()
-  }, [popularRecommend])
+    popularRecommendAction()
+  }, [popularRecommendAction])
 
   return (
-    <HotRecommendWrapper>
-      <ThemeHeaderRmc
+    <PopularRecommendWrapper>
+      <RecommendHeader
         title="热门推荐"
         keywords={['华语', '流行', '摇滚', '民谣', '电子']}
       />
       <div className="recommend-list">
-        {hotRecommends && hotRecommends.map(item => {
+        {popularRecommend && popularRecommend.map(item => {
           return (
             <SongCover key={item.id} info={item} className="recommend-list">
               {item.name}
@@ -35,6 +35,6 @@ export default function HotRecommend() {
           )
         })}
       </div>
-    </HotRecommendWrapper>
+    </PopularRecommendWrapper>
   )
 }

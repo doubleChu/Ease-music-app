@@ -33,7 +33,7 @@ export const SongCoverWrapper = styled.a`
         background-position: 0 -537px;
         color: #ccc;
 
-        .erji {
+        .earphone {
           margin-right: 5px;
           display: inline-block;
           width: 14px;
@@ -55,9 +55,5 @@ export const SongCoverWrapper = styled.a`
     font-size: 14px;
     color: #000;
     margin-top: 5px;
-  }
-
-  .cover-source {
-    color: #666;
   }
 `

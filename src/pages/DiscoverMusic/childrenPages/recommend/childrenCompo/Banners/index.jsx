@@ -3,6 +3,7 @@ import { shallowEqual, useSelector} from "react-redux"
 import { useState, useEffect, useRef, useCallback } from "react"
 import { useBannersAction } from "../../store/actionCreator"
 import { Carousel } from "antd"
+import 'antd/dist/antd.css'
 import { BannerControl, BannerLeft, BannerRight, BannerWrapper } from "./style"
 
 export default function Banners() {

@@ -1,6 +1,6 @@
 import styled from "styled-components";
 
-export const HotRecommendWrapper = styled.div`
+export const PopularRecommendWrapper = styled.div`
   margin-top: 6px;
   .recommend-list {
     display: flex;
