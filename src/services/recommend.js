@@ -12,3 +12,21 @@ export const getPopularRecom = (limit) =>
   })
 
   export const getNewestAlbum = () => request({ url: "/album/newest" })
+
+  export const getSingerList = (limit, type, area) =>
+  request({
+    url: "/artist/list",
+    params: {
+      limit,
+      type,
+      area,
+    },
+  })
+
+  export const getPopularDj = (limit) =>
+  request({
+    url: "/dj/hot",
+    params: {
+      limit,
+    },
+  })

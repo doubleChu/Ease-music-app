@@ -1,5 +1,5 @@
 import { useCallback } from "react"
-import { getBanners, getPopularRecom, getNewestAlbum } from "../../../../../services/recommend"
+import { getBanners, getPopularRecom, getNewestAlbum, getSingerList, getPopularDj } from "../../../../../services/recommend"
 import { useDispatch } from "react-redux"
 
 export const useBannersAction = () => {
@@ -54,4 +54,28 @@ export const useNewestAlbumAction = () => {
     })
   }, [dispatch])
   return getNewestAlbumAction
+}
+
+export const useSettledSingerAction = () => {
+  const dispatch = useDispatch()
+  const getSettledSingerAction = useCallback(async (limit, type, area) => {
+    const settledSinger = await getSingerList(limit, type, area).then((res) => res.artists)
+    dispatch({
+      type: "CHANGE_SETTLED_SINGER",
+      settledSinger: settledSinger,
+    })
+  }, [dispatch])
+  return getSettledSingerAction
+}
+
+export const usePopularDjAction = () => {
+  const dispatch = useDispatch()
+  const getPopularDjAction = useCallback(async (limit) => {
+    const popularDj = await getPopularDj(limit).then((res) => res.djRadios)
+    dispatch({
+      type: "CHANGE_POPULAR_DJ",
+      popularDj: popularDj,
+    })
+  }, [dispatch])
+  return getPopularDjAction
 }
