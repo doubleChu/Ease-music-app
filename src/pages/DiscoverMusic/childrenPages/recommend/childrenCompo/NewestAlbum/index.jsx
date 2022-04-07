@@ -29,7 +29,7 @@ export default function NewestAlbum() {
   */
   return (
     <NewAlbumWrapper>
-      <RecommendHeader title="新碟上架" keywords={[]}/>
+      <RecommendHeader title="新碟上架"/>
       <div className="content">
         <div className="inner">
           <Carousel dots={false} ref={albumRef} speed={1500}>

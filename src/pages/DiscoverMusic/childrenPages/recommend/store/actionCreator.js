@@ -1,6 +1,7 @@
 import { useCallback } from "react"
-import { getBanners, getPopularRecom, getNewestAlbum, getSingerList, getPopularDj } from "../../../../../services/recommend"
 import { useDispatch } from "react-redux"
+import { getBanners, getPopularRecom, getNewestAlbum, getSingerList, getPopularDj } from "../../../../../services/recommend"
+import { getTopListDetail } from '../../../../../services/topList'
 
 export const useBannersAction = () => {
   const dispatch = useDispatch()
@@ -78,4 +79,20 @@ export const usePopularDjAction = () => {
     })
   }, [dispatch])
   return getPopularDjAction
+}
+
+export const useTopListDetailAction = () => {
+  const dispatch = useDispatch()
+  const getTopListDetailAction = useCallback(async (id0, id1, id2) => {
+    const topListDetail0 = await getTopListDetail(id0).then((res) => res.playlist)
+    const topListDetail1 = await getTopListDetail(id1).then((res) => res.playlist)
+    const topListDetail2 = await getTopListDetail(id2).then((res) => res.playlist)
+    dispatch({
+      type: "CHANGE_TOP_LIST_DETAIL",
+      topListDetail0: topListDetail0,
+      topListDetail1: topListDetail1,
+      topListDetail2: topListDetail2,
+    })
+  }, [dispatch])
+  return getTopListDetailAction
 }

@@ -7,6 +7,7 @@ import NewestAlbum from "./childrenCompo/NewestAlbum";
 import UserLogin from "./childrenCompo/UserLogin";
 import SettledSinger from "./childrenCompo/SettleSinger";
 import PopularDj from "./childrenCompo/PopularDj";
+import TopList_3 from "./childrenCompo/TopList_3";
 
 export default function Recommend() {
   return (
@@ -17,6 +18,8 @@ export default function Recommend() {
         <RecommendLeft>
           <PopularRecommend/>
           <NewestAlbum/>
+          {/* eslint-disable-next-line */}
+          <TopList_3/>
         </RecommendLeft>
         {/* 主体推荐页右侧 */}
         <RecommendRight>

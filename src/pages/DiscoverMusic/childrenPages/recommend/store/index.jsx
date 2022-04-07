@@ -4,6 +4,9 @@ const initState = {
     newestAlbum: [],
     settledSinger: [],
     popularDj: [],
+    topListDetail0: {},
+    topListDetail1: {},
+    topListDetail2: {},
 }
 
 export default function reducer (state = initState, action){
@@ -24,6 +27,11 @@ export default function reducer (state = initState, action){
             return newState
         case "CHANGE_POPULAR_DJ":
             newState.popularDj = action.popularDj
+            return newState
+        case "CHANGE_TOP_LIST_DETAIL":
+            newState.topListDetail0 = action.topListDetail0
+            newState.topListDetail1 = action.topListDetail1
+            newState.topListDetail2 = action.topListDetail2
             return newState
         default:
             return state    
