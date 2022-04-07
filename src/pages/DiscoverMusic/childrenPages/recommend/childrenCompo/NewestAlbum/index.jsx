@@ -32,7 +32,7 @@ export default function NewestAlbum() {
       <RecommendHeader title="新碟上架" keywords={[]}/>
       <div className="content">
         <div className="inner">
-          <Carousel dots={false} ref={albumRef}>
+          <Carousel dots={false} ref={albumRef} speed={1500}>
             {[0, 1].map((item) => {
               return (
                 <div key={item} className="page">
