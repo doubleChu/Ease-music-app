@@ -2,7 +2,7 @@ import * as React from "react"
 import { useEffect } from "react"
 import { shallowEqual, useSelector } from "react-redux"
 import { usePopularDjAction } from "../../store/actionCreator"
-import ArtistHeader from "../SettleSinger/SingerCompo/ArtistHeader"
+import ArtistHeader from "../SettledSinger/SingerCompo/ArtistHeader"
 import DjCover from "./DjCover"
 import { PopularDjWrapper } from "./style"
 
