@@ -5,7 +5,7 @@ import Banners from "./childrenCompo/Banners";
 import PopularRecommend from "./childrenCompo/PopularRecom";
 import NewestAlbum from "./childrenCompo/NewestAlbum";
 import UserLogin from "./childrenCompo/UserLogin";
-import SettledSinger from "./childrenCompo/SettleSinger";
+import SettledSinger from "./childrenCompo/SettledSinger";
 import PopularDj from "./childrenCompo/PopularDj";
 import TopList_3 from "./childrenCompo/TopList_3";
 
