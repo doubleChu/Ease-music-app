@@ -1,4 +1,4 @@
-import styled from 'styled-components'
+import styled from "styled-components"
 
 export const PlayBarWrapper = styled.div`
   position: fixed;
@@ -54,6 +54,7 @@ export const PlayBarWrapper = styled.div`
 export const Control = styled.div`
   display: flex;
   align-items: center;
+  padding-right: 20px;
 
   .pre,
   .next,
@@ -77,13 +78,13 @@ export const Control = styled.div`
     width: 36px;
     height: 36px;
     /* 动态的传递 */
-    background-position: 0 ${props => (props.isPlaying ? '-165px' : '-204px')};
+    background-position: 0 ${(props) => (props.isPlaying ? "-165px" : "-204px")};
     margin-top: 0;
 
     &:hover {
       /* 动态的传递 */
       background-position: -40px
-        ${props => (props.isPlaying ? '-165px' : '-204px')};
+        ${(props) => (props.isPlaying ? "-165px" : "-204px")};
     }
   }
 
@@ -115,15 +116,27 @@ export const PlayerInfo = styled.div`
       line-height: 28px;
       .song-name {
         color: #e8e8e8;
-        margin: 0 10px;
       }
       .singer-name {
         color: #9b9b9b;
       }
+      .mv {
+        display: inline-block;
+        margin: 3px 10px -3px;
+        background-position: -1px -57px;
+        width: 16px;
+        height: 16px;
+        outline: none;
+        &:hover{
+          background-position: -21px -57px;
+        }
+        cursor: pointer;
+      }
     }
 
+
     .ant-slider {
-      width: 493px;
+      width: 466px;
       height: 9px;
 
       margin-top: -2px;
@@ -136,11 +149,11 @@ export const PlayerInfo = styled.div`
       }
 
       .ant-slider-rail {
-        background: url(${require('../../assets/imgs/progress_bar.png')}) 0 0;
+        background: url(${require("../../assets/imgs/progress_bar.png")}) 0 0;
       }
 
       .ant-slider-track {
-        background: url(${require('../../assets/imgs/progress_bar.png')});
+        background: url(${require("../../assets/imgs/progress_bar.png")});
         background-position: left -66px;
       }
 
@@ -148,7 +161,7 @@ export const PlayerInfo = styled.div`
         width: 20px;
         height: 22px;
         border: 0;
-        background: url(${require('../../assets/imgs/sprite_icon.png')});
+        background: url(${require("../../assets/imgs/sprite_icon.png")});
         background-position: 0 -250px;
       }
     }
@@ -215,14 +228,14 @@ export const Operator = styled.div`
     }
 
     .loop {
-      background-position: ${props => {
+      background-position: ${(props) => {
         switch (props.playSequence) {
           case 1:
-            return '-66px -248px;'
+            return "-66px -248px;"
           case 2:
-            return '-66px -344px;'
+            return "-66px -344px;"
           default:
-            return '-3px -344px;'
+            return "-3px -344px;"
         }
       }};
 
@@ -260,14 +273,14 @@ export const Operator = styled.div`
       }
 
       .ant-slider-track {
-        background: url(${require('../../assets/imgs/playbar_sprite.png')}) no-repeat
-          0 9999px;
+        background: url(${require("../../assets/imgs/playbar_sprite.png")})
+          no-repeat 0 9999px;
         background-position: -40px bottom;
       }
 
       .ant-slider-handle {
         border: 0;
-        background: url(${require('../../assets/imgs/sprite_icon.png')});
+        background: url(${require("../../assets/imgs/sprite_icon.png")});
         background-position: -42px -250px;
       }
     }

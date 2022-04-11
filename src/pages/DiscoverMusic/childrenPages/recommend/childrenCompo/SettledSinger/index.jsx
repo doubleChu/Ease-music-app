@@ -23,7 +23,7 @@ export default function SettledSinger() {
     <SettledSingerWrapper>
       <ArtistHeader titleSlot="歌手" rightSlot="查看全部 >" />
       <div className="singer-container">
-        {settledSinger && settledSinger.slice(9, 14).map(item => {
+        {settledSinger && settledSinger.slice(10).map(item => {
           return <SingerCover key={item.id} info={item} />
         })}
       </div>
