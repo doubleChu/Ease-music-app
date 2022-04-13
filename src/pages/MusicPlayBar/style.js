@@ -247,7 +247,7 @@ export const Operator = styled.div`
     margin-bottom: 6px;
     .volume {
       background-position: -2px -248px;
-      &:hover{
+      &:hover {
         background-position: -31px -248px;
       }
     }
@@ -264,9 +264,18 @@ export const Operator = styled.div`
         }
       }};
 
-      /* &.ant-popover-open {
-        background-color: red !important;
-      } */
+      &:hover {
+        background-position: ${(props) => {
+          switch (props.play_sequence) {
+            case 1:
+              return "-93px -248px;"
+            case 2:
+              return "-93px -344px;"
+            default:
+              return "-33px -344px;"
+          }
+        }};
+      }
     }
 
     .playlist {
@@ -276,6 +285,9 @@ export const Operator = styled.div`
       color: #ccc;
       width: 59px;
       background-position: -42px -68px;
+      &:hover {
+        background-position: -42px -98px;
+      }
     }
   }
 

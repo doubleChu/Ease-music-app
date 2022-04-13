@@ -136,6 +136,30 @@ export default function MusicPlayBar() {
                 }
               ></button>
             </Tooltip>
+            <button
+              className="sprite_player btn playlist"
+              // 阻止事件捕获,父元素点击事件,不希望点击子元素也触发该事件
+              onClick={() => sethasPlaylist(!hasPlaylist)}
+            >
+            </button>
+            <Tooltip title="播放列表">
+                {/* <span>{playlistCount}</span> */}
+                <span>1</span>
+              </Tooltip>
+              <CSSTransition
+                in={hasPlaylist}
+                timeout={3000}
+                classNames="playlist"
+              >
+                <SliderPlaylist
+                  isShowSlider={hasPlaylist}
+                  // playlistCount={playlistCount}
+                  // closeWindow={changePlaylistShow}
+                  // playMusic={forcePlayMusic}
+                  // changeSong={nextMusic}
+                  isPlaying={isPlaying}
+                />
+              </CSSTransition>
           </div>
         </Operator>
       </div>
