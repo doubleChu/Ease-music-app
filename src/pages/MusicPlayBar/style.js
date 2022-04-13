@@ -127,13 +127,12 @@ export const PlayerInfo = styled.div`
         width: 16px;
         height: 16px;
         outline: none;
-        &:hover{
+        &:hover {
           background-position: -21px -57px;
         }
         cursor: pointer;
       }
     }
-
 
     .ant-slider {
       width: 466px;
@@ -199,13 +198,36 @@ export const Operator = styled.div`
     }
   }
 
-  .share {
-    background-position: -114px -163px;
-  }
-
   .left {
     display: flex;
     align-items: center;
+    margin-bottom: 6px;
+    justify-content: space-around;
+    width: 87px;
+    .pictureIP {
+      background: url(${require("../../assets/imgs/pictureInPicture.png")}) -4px -4px;
+      width: 17px;
+      height: 17px;
+      &:hover {
+        background-position: -4px -29px;
+      }
+    }
+    .collection {
+      background-position: -92px -166px;
+      width: 18px;
+      height: 18px;
+      &:hover {
+        background-position: -92px -192px;
+      }
+    }
+    .share {
+      background-position: -118px -167px;
+      width: 18px;
+      height: 18px;
+      &:hover {
+        background-position: -118px -193px;
+      }
+    }
   }
 
   // ! changed
@@ -222,14 +244,17 @@ export const Operator = styled.div`
     width: 126px;
     padding-left: 13px;
     background-position: -147px -240px;
-
+    margin-bottom: 6px;
     .volume {
       background-position: -2px -248px;
+      &:hover{
+        background-position: -31px -248px;
+      }
     }
 
     .loop {
       background-position: ${(props) => {
-        switch (props.playSequence) {
+        switch (props.play_sequence) {
           case 1:
             return "-66px -248px;"
           case 2:
