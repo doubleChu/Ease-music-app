@@ -7,6 +7,7 @@ import { useSongDetailAction, useLyricAction } from "./store/actionCreator"
 import { Slider, Tooltip } from "antd"
 import { Control, Operator, PlayBarWrapper, PlayerInfo } from "./style"
 import { CSSTransition } from "react-transition-group"
+import PlayListLeft from "./childrenPages/PlayListLeft"
 
 export default function MusicPlayBar() {
   const [currentTime, setCurrentTime] = useState(0) // 当前播放的时间
@@ -151,14 +152,14 @@ export default function MusicPlayBar() {
                 timeout={3000}
                 classNames="playlist"
               >
-                <SliderPlaylist
+                {/* <SliderPlaylist
                   isShowSlider={hasPlaylist}
-                  // playlistCount={playlistCount}
-                  // closeWindow={changePlaylistShow}
-                  // playMusic={forcePlayMusic}
-                  // changeSong={nextMusic}
+                  playlistCount={playlistCount}
+                  closeWindow={changePlaylistShow}
+                  playMusic={forcePlayMusic}
+                  changeSong={nextMusic}
                   isPlaying={isPlaying}
-                />
+                /> */}
               </CSSTransition>
           </div>
         </Operator>
