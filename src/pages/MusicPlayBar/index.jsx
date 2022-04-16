@@ -1,13 +1,12 @@
 import * as React from "react"
 import { useEffect, useRef, useCallback, useState } from "react"
-import { shallowEqual, useSelector } from "react-redux"
+import { shallowEqual, useSelector, useDispatch } from "react-redux"
 import { setImageSize, getMusicUrl, formatDate } from "../../utils/format"
 import { NavLink } from "react-router-dom"
-import { useSongDetailAction, useLyricAction } from "./store/actionCreator"
+import { useSongDetailAction, useLyricAction, changeSongIndexAction, changeLyricIndexAction } from "./store/actionCreator"
 import { Slider, Tooltip } from "antd"
 import { Control, Operator, PlayBarWrapper, PlayerInfo } from "./style"
-import { CSSTransition } from "react-transition-group"
-import PlayListLeft from "./childrenPages/PlayListLeft"
+import MusicPlayList from "./childrenPages/MusicPlayList"
 
 export default function MusicPlayBar() {
   const [currentTime, setCurrentTime] = useState(0) // 当前播放的时间
@@ -18,10 +17,14 @@ export default function MusicPlayBar() {
   const [isPlaying, setIsPlaying] = useState(false) // 是否正在播放
   const [hasPlaylist, sethasPlaylist] = useState(false) // 是否显示播放列表
 
-  const { songDetail, lyricList } = useSelector(
+  const { songDetail, lyricList, lyricIndex, playListCount, playList, songIndex } = useSelector(
     (state) => ({
       songDetail: state.playBarReducer.songDetail,
       lyricList: state.playBarReducer.lyricList,
+      lyricIndex: state.playBarReducer.lyricIndex,
+      playListCount: state.playBarReducer.playListCount,
+      playList: state.playBarReducer.playList,
+      songIndex: state.playBarReducer.songIndex,
     }),
     shallowEqual
   )
@@ -36,6 +39,7 @@ export default function MusicPlayBar() {
     lyricAction(1436264336)
   }, [lyricAction])
 
+  const dispatch = useDispatch()
   const audioRef = useRef()
 
   const playMusic = useCallback(() => {
@@ -44,6 +48,53 @@ export default function MusicPlayBar() {
     // 播放或暂停（根据原isPlaying状态）
     isPlaying ? audioRef.current.pause() : audioRef.current.play()
   }, [isPlaying])
+
+  const changePlaylistShow = useCallback(() => {
+    sethasPlaylist(!hasPlaylist)
+  }, [hasPlaylist])
+
+  // ! async
+  const changeSongAndIndex = async (tag) => {
+    // 根据播放顺序选择下一首音乐
+    let songIndexNext = songIndex
+    switch (playSequence) {
+      case 0:
+        // 顺序播放
+        // 更改当前播放音乐的下标
+        songIndexNext += tag
+        // 判断当前音乐的下标是否超出播放列表长度
+        if (songIndexNext >= playList.length) songIndexNext = 0
+        if (songIndexNext < 0) songIndexNext = playList.length - 1
+        break
+      case 1: // 随机播放
+        // 生成一个随机数
+        let random = Math.floor(Math.random() * playList.length)
+        while (random === songIndexNext) {
+          random = Math.floor(Math.random() * playList.length)
+        }
+        // 更改当前播放音乐的下标
+        songIndexNext = random
+        break
+      default:
+    }
+
+    // 获取需要播放的音乐
+    const songNext = playList[songIndexNext]
+    await songDetailAction(songNext.id)
+    await lyricAction(songNext.id)
+    dispatch(changeSongIndexAction(songIndexNext))
+    // 请求歌曲的歌词
+  }
+
+  // 切换下一首歌曲,不播放音乐
+  const nextMusic = (tag) => {
+    changeSongAndIndex(tag)
+    setIsPlaying(false)
+  }
+
+  const changeVolume = (volume) => {
+    audioRef.current.volume = volume / 100
+  }
 
   const songName = songDetail.name
   const songDuration = songDetail.dt
@@ -54,15 +105,95 @@ export default function MusicPlayBar() {
 
   useEffect(() => {
     audioRef.current.src = getMusicUrl(songID)
+    audioRef.current.volume = 0.3
   }, [songID])
+
+  useEffect(() => {
+    if(isPlaying){
+      audioRef.current.play()
+      console.log(Boolean(isPlaying))
+      console.log(songName);
+    }
+  }, [isPlaying, songName])
+
+  // 滑动滑块时触发
+  const sliderOnChange = useCallback(
+    (value) => {
+      // 滑动滑块时:更改标识变量为false(touch move for changing state),此时不会触发onTimeUpdate(歌曲播放事件)
+      setIsSliding(true)
+      // 更改"当前播放时间"要的是毫秒数: 241840(总毫秒)   1 * 241840 / 1000 241.84 / 60  4.016667
+      setCurrentTime((value / 100) * songDuration)
+      // 更改进度条值
+      setProgress(value)
+    },
+    [songDuration]
+  )
+
+  // 手指抬起时触发
+  const sliderAfterChange = useCallback(
+    (value) => {
+      // 重新设置当前播放时长 value(进度)/100 * duration(总毫秒数) / 1000 得到当前播放的"秒数"
+      audioRef.current.currentTime = ((value / 100) * songDuration) / 1000
+      setIsSliding(false)
+      // 更改播放状态
+      setIsPlaying(true)
+      // 播放音乐
+      audioRef.current.play()
+    },
+    [songDuration, audioRef]
+  )
+
+  const audioOnTimeUpdate = (e) => {
+    // 没有在滑动滑块时触发(默认时没有滑动)
+    let currentTime = e.target.currentTime
+    if (!isSliding) {
+      setCurrentTime(currentTime * 1000)
+      setProgress(((currentTime * 1000) / songDuration) * 100)
+    }
+
+    let i = 0
+    while (currentTime * 1000 > lyricList[i]?.totalTime) i++
+    // 对dispatch进行优化,如果index没有改变,就不进行dispatch
+    if (lyricIndex !== i - 1) {
+      dispatch(changeLyricIndexAction(i - 1));
+    }
+  }
+
+  // 切换歌曲(点击播放下一首或上一首音乐)
+  const switchSong = (tag) => {
+    // 首先判断播放列表中是否存在音乐，再决定是否播放
+    if (playListCount < 1) {
+      return
+    }
+    if (playListCount === 1) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+    }
+    changeSongAndIndex(tag)
+    setIsPlaying(true + Math.random()) // 更改播放状态图标
+  }
+
+  // 当前歌曲播放结束后
+  const handleTimeEnd = () => {
+    // 单曲循环
+    if (playSequence === 2) {
+      audioRef.current.currentTime = 0
+      audioRef.current.play()
+    } else {
+      // 播放下一首
+      changeSongAndIndex(1)
+      // 更改播放状态
+      setIsPlaying(true + Math.random())
+    }
+  }
 
   return (
     <PlayBarWrapper className="sprite_player">
       <div className="w980 content">
         <Control isPlaying={isPlaying}>
-          <button className="sprite_player pre"></button>
+          <button className="sprite_player pre" onClick={() => switchSong(-1)}></button>
           <button className="sprite_player play" onClick={playMusic}></button>
-          <button className="sprite_player next"></button>
+          <button className="sprite_player next" onClick={() => switchSong(1)}></button>
         </Control>
         <PlayerInfo>
           <NavLink to={"/song?id=" + songID} className="image">
@@ -85,7 +216,13 @@ export default function MusicPlayBar() {
                 {songArtist}
               </a>
             </div>
-            <Slider defaultValue={0} value={progress} />
+            <Slider
+              defaultValue={0}
+              tooltipVisible={false}
+              value={progress}
+              onChange={sliderOnChange}
+              onAfterChange={sliderAfterChange}
+            />
           </div>
           <div className="song-time">
             <span className="now-time">{formatDate(currentTime, "mm:ss")}</span>
@@ -95,23 +232,23 @@ export default function MusicPlayBar() {
             </span>
           </div>
         </PlayerInfo>
-        <Operator play_sequence = {playSequence}>
+        <Operator play_sequence={playSequence}>
           <div className="left">
             {/* eslint-disable */}
             <a
-              href="#!"
+              href="#"
               className="pictureIP"
               target="_blank"
               rel="noopener noreferrer"
             ></a>
             <a
-              href="#!"
+              href="#"
               className="collection sprite_player"
               target="_blank"
               rel="noopener noreferrer"
             ></a>
             <a
-              href="#!"
+              href="#"
               className="share sprite_player"
               target="_blank"
               rel="noopener noreferrer"
@@ -131,36 +268,38 @@ export default function MusicPlayBar() {
               <button
                 className="sprite_player btn loop"
                 onClick={(e) =>
-                  setPlaySequence( playSequence =>
+                  setPlaySequence((playSequence) =>
                     playSequence < 2 ? playSequence + 1 : 0
                   )
                 }
               ></button>
             </Tooltip>
-            <button
-              className="sprite_player btn playlist"
-              // 阻止事件捕获,父元素点击事件,不希望点击子元素也触发该事件
-              onClick={() => sethasPlaylist(!hasPlaylist)}
-            >
-            </button>
             <Tooltip title="播放列表">
-                {/* <span>{playlistCount}</span> */}
-                <span>1</span>
-              </Tooltip>
-              <CSSTransition
-                in={hasPlaylist}
-                timeout={3000}
-                classNames="playlist"
+              <button
+                className="sprite_player btn playlist"
+                // 阻止事件捕获,父元素点击事件,不希望点击子元素也触发该事件
+                onClick={() => sethasPlaylist(!hasPlaylist)}
               >
-                {/* <SliderPlaylist
-                  isShowSlider={hasPlaylist}
-                  playlistCount={playlistCount}
-                  closeWindow={changePlaylistShow}
-                  playMusic={forcePlayMusic}
-                  changeSong={nextMusic}
-                  isPlaying={isPlaying}
-                /> */}
-              </CSSTransition>
+                {playListCount}
+              </button>
+            </Tooltip>
+            <MusicPlayList
+              isShowSlider={hasPlaylist}
+              playListCount={playListCount}
+              closeWindow={changePlaylistShow}
+              playMusic={setIsPlaying}
+              changeSong={nextMusic}
+              isPlaying={isPlaying}
+            />
+          </div>
+          <div
+            className="sprite_player top-volume"
+            style={{ display: hasVolumeBar ? "block" : "none" }}
+            onMouseLeave={() => {
+              setHasVolumeBar(false)
+            }}
+          >
+            <Slider vertical defaultValue={30} onChange={changeVolume} />
           </div>
         </Operator>
       </div>
@@ -168,6 +307,8 @@ export default function MusicPlayBar() {
         id="audio"
         ref={audioRef}
         preload="auto"
+        onTimeUpdate={audioOnTimeUpdate}
+        onEnded={handleTimeEnd}
         src="https://music.163.com/song/media/outer/url?id=1935311363.mp3"
       />
     </PlayBarWrapper>

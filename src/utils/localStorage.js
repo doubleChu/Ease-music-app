@@ -38,7 +38,7 @@ export function getPlaylistID(key = "playlistID") {
  * @param {String} key
  */
 export function removeSongID(id, key = "playlistID") {
-    localStorage.setItem(key, localStorage.getItem(key).replace(id + ',',''))
+    localStorage.setItem(key, localStorage.getItem(key)?.replace(id + ',',''))
 }
 
 /**

@@ -61,20 +61,18 @@ export const changePlayListAction = (playList) => ({
 })
 
 // 改变歌曲数量
-const changePlayListCountAction = (playListCount) => ({
+export const changePlayListCountAction = (playListCount) => ({
   type: "GET_PLAY_LIST_COUNT",
   playListCount,
 })
 
-// 修改播放列表并修改歌曲数量
-export const changePlaylistAndCount = (playlist) => {
-  return (dispatch) => {
-    dispatch(changePlayListAction(playlist))
-    dispatch(changePlayListCountAction(playlist.length))
-  }
-}
 
 export const changeLyricIndexAction = (lyricIndex) => ({
   type: "GET_LYRIC_INDEX",
   lyricIndex,
+})
+
+export const changeSongIndexAction = (songIndex) => ({
+  type: "GET_SONG_INDEX",
+  songIndex,
 })

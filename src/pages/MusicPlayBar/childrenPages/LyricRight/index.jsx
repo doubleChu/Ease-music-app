@@ -1,6 +1,6 @@
 import * as React from 'react'
 import { useEffect, useRef } from 'react'
-import { useSelector, useDispatch, shallowEqual } from 'react-redux'
+import { useSelector, shallowEqual } from 'react-redux'
 import { scrollTo } from '../../../../utils/animatedScrollTo'
 import { LyricContentWrapper } from './style'
 
@@ -8,8 +8,8 @@ export default function LyricRight() {
   // redux hook
   const { lyricList, lyricIndex } = useSelector(
     state => ({
-      lyricList: state.getIn(['player', 'lyricList']),
-      currentLyricIndex: state.getIn(['player', 'currentLyricIndex']),
+      lyricList: state.playBarReducer.lyricList,
+      lyricIndex: state.playBarReducer.lyricIndex,
     }),
     shallowEqual
   )

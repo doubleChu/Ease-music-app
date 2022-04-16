@@ -169,7 +169,7 @@ export const PlayerInfo = styled.div`
   .song-time {
     line-height: 68px;
     color: #a1a1a1;
-    margin: 0 30px 0 9px;
+    margin: 0 24px 0 9px;
 
     .total-time {
       color: #797979;
@@ -294,7 +294,7 @@ export const Operator = styled.div`
   .top-volume {
     position: absolute;
     top: -117px;
-    left: 65px;
+    left: 92px;
     clear: both;
     width: 32px;
     height: 113px;

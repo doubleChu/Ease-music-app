@@ -36,8 +36,9 @@ export const LyricContentWrapper = styled.div`
   }
 
   .lyric-item {
-    height: auto !important;
+    height: auto;
     line-height: 32px;
+    text-align: center;
     color: #989898;
     transition: color 0.7s linear;
     /* position: relative; */
@@ -45,7 +46,7 @@ export const LyricContentWrapper = styled.div`
 
     &.active {
       /* top: 12px; */
-      color: #fff!important;
+      color: #fff;
     }
   }
 

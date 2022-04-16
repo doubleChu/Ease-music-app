@@ -2,12 +2,12 @@ import styled from 'styled-components'
 
 export const SliderPlaylistWrapper = styled.div`
   position: absolute;
-  left: -445%;
+  left: 50%;
   bottom: 51px;
   width: 986px;
   height: 301px;
   border-radius: 7px;
-  /* transform: translateX(-50%); */
+  margin-left: -877px;
   cursor: default;
   /* background-color: #171617; */
 `
@@ -48,7 +48,7 @@ export const SliderPlaylistHeader = styled.div`
     text-align: center;
 
     .song-name {
-      width: 94%;
+      width: 100%;
       text-align: center;
     }
 
@@ -62,7 +62,7 @@ export const SliderPlaylistHeader = styled.div`
 export const SliderPlaylistMain = styled.div`
   display: flex;
   height: 260px;
-  background: url(${require('../../../../assets/img/playlist_bg.png')});
+  background: url(${require('../../../../assets/imgs/playlist_bg.png')});
   background-position: -1014px 0;
   background-repeat: repeat-y;
 
