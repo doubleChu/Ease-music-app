@@ -45,7 +45,7 @@ export default function TopListSongs() {
         </div>
         <div className="main-list">
           {
-            topListDetail && topListDetail.tracks.slice(0, 100).map((item,index) => {
+            topListDetail && topListDetail.tracks?.slice(0, 100).map((item,index) => {
               return   <SongItem 
               key={item.id}
               currentRanking={index+1} 
