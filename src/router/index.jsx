@@ -4,6 +4,7 @@ import MyFriends from "../pages/MyFriends";
 import MyMusic from "../pages/MyMusic";
 import Recommend from "../pages/DiscoverMusic/childrenPages/Recommend";
 import TopListMain from "../pages/DiscoverMusic/childrenPages/TopList";
+import PlayListMain from "../pages/DiscoverMusic/childrenPages/PlayListMain";
 
 export default function RouElement () {
     return(
@@ -34,7 +35,7 @@ const router = [
             },
             {
                 path: "playlist",
-                element: <div>222</div>,
+                element: <PlayListMain/>,
             },
             {
                 path: "djradio",

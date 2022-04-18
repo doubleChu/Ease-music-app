@@ -14,6 +14,7 @@ export const SongItemWrapper = styled.div`
   .singer{
     width: 169px;
   }
+  
   .rank-count {
     padding-left: 25px;
     width: 70px;
