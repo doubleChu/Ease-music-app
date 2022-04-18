@@ -1,6 +1,5 @@
 import * as React from "react"
-//import { useSelector, shallowEqual} from 'react-redux'
-import { setImageSize } from "../../utils/format"
+import { setImageSize } from "../../../../../../../utils/format.js"
 import { TopListWrapper } from "./style"
 
 // TODO: add events to play in bottom player

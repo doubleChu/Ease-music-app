@@ -7,3 +7,5 @@ export const getTopListDetail = (id) =>
       id,
     },
   })
+
+export const getAllTopList = () => request({ url: "/toplist" })

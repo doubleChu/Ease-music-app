@@ -1,7 +1,7 @@
 import * as React from 'react'
 import { useEffect } from 'react'
 import RecommendHeader from '../../../../../../components/RecommendHeader'
-import TopList from '../../../../../../components/TopList'
+import TopList from './TopListItem'
 import { TopListWrapper_3 } from './style'
 import { useSelector, shallowEqual } from 'react-redux'
 import { useTopListDetailAction } from '../../store/actionCreator'

@@ -2,7 +2,7 @@ import * as React from "react"
 import { RcmHeaderLeft, RcmHeaderRight, RcmHeaderWrapper } from "./style"
 
 export default function RecommendHeader(props) {
-  const { title, keywords = [] } = props
+  const { title, keywords = [], rightSlot } = props
   let headerHref = ""
   if (title === "热门推荐") headerHref = "/discover/playlist/"
   else if (title === "新碟上架") headerHref = "/discover/album/"
@@ -26,8 +26,14 @@ export default function RecommendHeader(props) {
         </ul>
       </RcmHeaderLeft>
       <RcmHeaderRight>
-        <a href={headerHref}>更多</a>
-        <i className="icon" />
+        {rightSlot ? (
+          <span>{rightSlot}</span>
+        ) : (
+          <>
+            <a href={headerHref}>更多</a>
+            <i className="icon" />
+          </>
+        )}
       </RcmHeaderRight>
     </RcmHeaderWrapper>
   )
